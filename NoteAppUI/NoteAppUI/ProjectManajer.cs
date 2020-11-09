@@ -8,33 +8,39 @@ using System.IO;
 
 namespace TUSUR.NoteApp
 {
-    /// <summary>
-    /// Класс, реализующий сохранение данных в файл и загрузки из него.
-    /// </summary>
-    internal class ProjectManager
+    public class ProjectManager
     {
-        private const string _externalPath = "C:\\Users\\User\\Documents\\NoteApp.notes";
+        /// <summary>
+        /// Путь к файлу.
+        /// </summary>
+        private static string _stringMyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp.notes";
+
+
+
+
+
+        /// <summary>
+        /// Проверка существования файла. Если файл не будет найден, то создастся новый.
+        /// </summary>
+        public static void CheckFile()
+        {
+            if (!File.Exists(_stringMyDocumentsPath))
+                File.Create(_stringMyDocumentsPath).Close();
+        }
 
         /// <summary>
         /// Метод, выполняющий запись в файл
         /// </summary>
-        /// <param name="projectDictionary">Экземпляр проекта для сериализации</param>
-        public static void ProjectSerialization(Project projectDictionary)
+        /// <param name="notes">Экземпляр проекта для сериализации</param>
+        public static void Serialization(Project notes)
         {
-            //var myDocumentsPath = Environment.GetFolderPath(SpecialFolder.MyDocuments);
-            // Экземпляр сериалиатора
             JsonSerializer serializer = new JsonSerializer();
 
-            // Преобразование string в System.IO.Stream
-            byte[] byteArray = Encoding.UTF8.GetBytes(_externalPath);
-            MemoryStream stream = new MemoryStream(byteArray);
-
-            // Открытие потока для записи в файл
-            using (StreamWriter sw = new StreamWriter(@stream))
+            CheckFile();
+            using (StreamWriter sw = new StreamWriter(_stringMyDocumentsPath))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                // Вызов сериализатора и передача объекта сеиализации
-                serializer.Serialize(writer, projectDictionary);
+                serializer.Serialize(writer, notes);
             }
         }
 
@@ -42,27 +48,20 @@ namespace TUSUR.NoteApp
         /// Метод, выполняющий чтение из файла
         /// </summary>
         /// <returns>Экземпляр проекта, считанный из файла</returns>
-        public static Project ProjectDeserialization()
+        public static Project Deserialization()
         {
-            // Экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();
-
-            // Переменная для помещения результата
             Project project = null;
 
-            // Преобразование string в System.IO.Stream
-            byte[] byteArray = Encoding.UTF8.GetBytes(_externalPath);
-            MemoryStream stream = new MemoryStream(byteArray);
-
-            // Открытие потока для чтения и файла
-            using (StreamReader sr = new StreamReader(@stream))
+            CheckFile();
+            using (StreamReader sr = new StreamReader(_stringMyDocumentsPath))
             using (JsonReader reader = new JsonTextReader(sr))
             {
-                // Вызов десериализации
-                project = (Project)serializer.Deserialize(reader);
+                project = (Project)serializer.Deserialize<Project>(reader);
             }
 
             return project;
         }
     }
+
 }
