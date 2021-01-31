@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace TUSUR.NoteApp
+namespace NoteApp
 {
     /// <summary>
     /// Содержит возможные категории заметок.
     /// </summary>
-    /// <remarks>
+
     /// В качестве типа перечислителей используется тип byte, 
-    /// поскольку это позволит сэкономить память при большом количестве заметок 	(порядка 200).
-    /// </remarks>
+    /// потому что это позволит сэкономить память при большом количестве заметок 	(порядка 200).
+   
     enum NoteСategory : byte
     {
         Work,
         Home,
-        HealseAndSport,
+        HealthAndSport,
         People,
         Document,
         Finance,

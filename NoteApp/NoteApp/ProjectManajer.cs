@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace TUSUR.NoteApp
+namespace NoteApp
 {
+    /// <summary>
+    /// Класс, реализующий методы сохранения
+    /// и загрузки проекта через файл.
+    /// </summary>
     public class ProjectManager
     {
         /// <summary>
-        /// Путь к файлу.
+        /// Путь к файлу сохранения и загрузки.
         /// </summary>
-        private static string _stringMyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp.notes";
-
-
-
-
+        private static string _stringMyDocumentsPath = 
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp.notes";
 
         /// <summary>
         /// Проверка существования файла. Если файл не будет найден, то создастся новый.
@@ -29,9 +30,8 @@ namespace TUSUR.NoteApp
         }
 
         /// <summary>
-        /// Метод, выполняющий запись в файл
+        /// Метод, выполняющий сохранение проекта в файл.
         /// </summary>
-        /// <param name="notes">Экземпляр проекта для сериализации</param>
         public static void Serialization(Project notes)
         {
             JsonSerializer serializer = new JsonSerializer();
@@ -45,13 +45,12 @@ namespace TUSUR.NoteApp
         }
 
         /// <summary>
-        /// Метод, выполняющий чтение из файла
+        /// Метод, выполняющий загрузку проекта из файла
         /// </summary>
-        /// <returns>Экземпляр проекта, считанный из файла</returns>
         public static Project Deserialization()
         {
-            JsonSerializer serializer = new JsonSerializer();
             Project project = null;
+            JsonSerializer serializer = new JsonSerializer();
 
             CheckFile();
             using (StreamReader sr = new StreamReader(_stringMyDocumentsPath))
@@ -63,5 +62,4 @@ namespace TUSUR.NoteApp
             return project;
         }
     }
-
 }

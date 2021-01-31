@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TUSUR.NoteApp
+namespace NoteApp
 {
     /// <summary>
     /// Класс заметок.
@@ -12,39 +12,32 @@ namespace TUSUR.NoteApp
     internal class Note : ICloneable
     {
         /// <summary>
-        /// Текст названия.
+        /// Название заметки.
         /// </summary>
-        /// <remarks>
-        /// Доступно для изменений.
-        /// </remarks>
         private string _title { get; set; }
+
         /// <summary>
         /// Категория заметки.
         /// </summary>
-        /// <remarks>
-        /// Доступно для изменений.
-        /// </remarks>
         private NoteСategory _category { get; set; }
+
         /// <summary>
         /// Текст заметки.
         /// </summary>
-        /// <remarks>
-        /// Доступно для изменений.
-        /// </remarks>
         private string _text { get; set; }
+
         /// <summary>
-        /// Время создания.
+        /// Время создания заметки.
         /// </summary>
         /// <remarks>
-        /// Доступно для чтения.
+        /// Инициализируется один раз при создании объекта
+        /// и больше не модифицируется, доступна для чтения.
         /// </remarks>
         private readonly DateTime _creationTime;
+
         /// <summary>
-        /// Время последнего изменения.
+        /// Время последнего изменения заметки.
         /// </summary>
-        /// <remarks>
-        /// Доступно для чтения.
-        /// </remarks>
         private DateTime _lastChangeTime { get; }
 
         public Note()
@@ -106,6 +99,5 @@ namespace TUSUR.NoteApp
                 return _creationTime;
             }
         }
-
     }
 }
