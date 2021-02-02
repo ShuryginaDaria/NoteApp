@@ -142,10 +142,10 @@
             this.CategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(140, 6);
+            this.CategoryComboBox.Location = new System.Drawing.Point(130, 6);
             this.CategoryComboBox.MaximumSize = new System.Drawing.Size(220, 0);
             this.CategoryComboBox.Name = "CategoryComboBox";
-            this.CategoryComboBox.Size = new System.Drawing.Size(146, 28);
+            this.CategoryComboBox.Size = new System.Drawing.Size(156, 28);
             this.CategoryComboBox.TabIndex = 0;
             // 
             // NoteListBox
@@ -164,7 +164,7 @@
             // 
             this.ModifiedDateTimePicker.Enabled = false;
             this.ModifiedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ModifiedDateTimePicker.Location = new System.Drawing.Point(336, 80);
+            this.ModifiedDateTimePicker.Location = new System.Drawing.Point(311, 75);
             this.ModifiedDateTimePicker.Name = "ModifiedDateTimePicker";
             this.ModifiedDateTimePicker.Size = new System.Drawing.Size(135, 26);
             this.ModifiedDateTimePicker.TabIndex = 7;
@@ -172,7 +172,7 @@
             // ModifiedTitleLabel
             // 
             this.ModifiedTitleLabel.AutoSize = true;
-            this.ModifiedTitleLabel.Location = new System.Drawing.Point(246, 85);
+            this.ModifiedTitleLabel.Location = new System.Drawing.Point(232, 80);
             this.ModifiedTitleLabel.Name = "ModifiedTitleLabel";
             this.ModifiedTitleLabel.Size = new System.Drawing.Size(73, 20);
             this.ModifiedTitleLabel.TabIndex = 6;
@@ -182,7 +182,7 @@
             // 
             this.CreatedDateTimePicker.Enabled = false;
             this.CreatedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.CreatedDateTimePicker.Location = new System.Drawing.Point(91, 80);
+            this.CreatedDateTimePicker.Location = new System.Drawing.Point(82, 75);
             this.CreatedDateTimePicker.Name = "CreatedDateTimePicker";
             this.CreatedDateTimePicker.Size = new System.Drawing.Size(135, 26);
             this.CreatedDateTimePicker.TabIndex = 5;
@@ -190,7 +190,7 @@
             // CreatedTitleLabel
             // 
             this.CreatedTitleLabel.AutoSize = true;
-            this.CreatedTitleLabel.Location = new System.Drawing.Point(4, 85);
+            this.CreatedTitleLabel.Location = new System.Drawing.Point(4, 80);
             this.CreatedTitleLabel.Name = "CreatedTitleLabel";
             this.CreatedTitleLabel.Size = new System.Drawing.Size(70, 20);
             this.CreatedTitleLabel.TabIndex = 4;
@@ -199,7 +199,7 @@
             // CategoryLabel
             // 
             this.CategoryLabel.AutoSize = true;
-            this.CategoryLabel.Location = new System.Drawing.Point(87, 45);
+            this.CategoryLabel.Location = new System.Drawing.Point(78, 45);
             this.CategoryLabel.Name = "CategoryLabel";
             this.CategoryLabel.Size = new System.Drawing.Size(89, 20);
             this.CategoryLabel.TabIndex = 3;
@@ -218,7 +218,7 @@
             // 
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitleLabel.Location = new System.Drawing.Point(3, 5);
+            this.TitleLabel.Location = new System.Drawing.Point(3, 9);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(212, 25);
             this.TitleLabel.TabIndex = 1;
@@ -230,10 +230,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteTextBox.Enabled = false;
-            this.NoteTextBox.Location = new System.Drawing.Point(3, 126);
+            this.NoteTextBox.Location = new System.Drawing.Point(3, 112);
+            this.NoteTextBox.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.NoteTextBox.Multiline = true;
             this.NoteTextBox.Name = "NoteTextBox";
-            this.NoteTextBox.Size = new System.Drawing.Size(563, 320);
+            this.NoteTextBox.Size = new System.Drawing.Size(563, 334);
             this.NoteTextBox.TabIndex = 0;
             // 
             // MenuStrip
@@ -263,7 +264,7 @@
             // 
             this.ExitToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("ExitToolStripMenu.Image")));
             this.ExitToolStripMenu.Name = "ExitToolStripMenu";
-            this.ExitToolStripMenu.Size = new System.Drawing.Size(252, 30);
+            this.ExitToolStripMenu.Size = new System.Drawing.Size(123, 30);
             this.ExitToolStripMenu.Text = "Exit";
             // 
             // EditToolStripMenu
@@ -281,21 +282,21 @@
             // 
             this.AddNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("AddNoteToolStripMenu.Image")));
             this.AddNoteToolStripMenu.Name = "AddNoteToolStripMenu";
-            this.AddNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
+            this.AddNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
             this.AddNoteToolStripMenu.Text = "Add Note";
             // 
             // EditNoteToolStripMenu
             // 
             this.EditNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("EditNoteToolStripMenu.Image")));
             this.EditNoteToolStripMenu.Name = "EditNoteToolStripMenu";
-            this.EditNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
+            this.EditNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
             this.EditNoteToolStripMenu.Text = "Edit Note";
             // 
             // RemoveNoteToolStripMenu
             // 
             this.RemoveNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("RemoveNoteToolStripMenu.Image")));
             this.RemoveNoteToolStripMenu.Name = "RemoveNoteToolStripMenu";
-            this.RemoveNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
+            this.RemoveNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
             this.RemoveNoteToolStripMenu.Text = "Remove Note";
             // 
             // HelpToolStripMenu
@@ -311,7 +312,7 @@
             // 
             this.AboutToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("AboutToolStripMenu.Image")));
             this.AboutToolStripMenu.Name = "AboutToolStripMenu";
-            this.AboutToolStripMenu.Size = new System.Drawing.Size(252, 30);
+            this.AboutToolStripMenu.Size = new System.Drawing.Size(146, 30);
             this.AboutToolStripMenu.Text = "About";
             this.AboutToolStripMenu.Click += new System.EventHandler(this.AboutToolStripMenu_Click);
             // 

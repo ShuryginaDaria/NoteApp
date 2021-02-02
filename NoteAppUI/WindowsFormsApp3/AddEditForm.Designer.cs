@@ -61,20 +61,20 @@
             // 
             // TitleTtextBox
             // 
-            this.TitleTtextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TitleTtextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleTtextBox.Location = new System.Drawing.Point(95, 6);
+            this.TitleTtextBox.Location = new System.Drawing.Point(93, 6);
             this.TitleTtextBox.Margin = new System.Windows.Forms.Padding(5);
             this.TitleTtextBox.MaximumSize = new System.Drawing.Size(900, 26);
             this.TitleTtextBox.Name = "TitleTtextBox";
-            this.TitleTtextBox.Size = new System.Drawing.Size(671, 26);
+            this.TitleTtextBox.Size = new System.Drawing.Size(673, 26);
             this.TitleTtextBox.TabIndex = 2;
             // 
             // CategoryComboBox
             // 
             this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(95, 42);
-            this.CategoryComboBox.Margin = new System.Windows.Forms.Padding(5);
+            this.CategoryComboBox.Location = new System.Drawing.Point(93, 42);
+            this.CategoryComboBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 5);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(193, 28);
             this.CategoryComboBox.TabIndex = 3;
@@ -92,7 +92,7 @@
             // 
             this.CreatedDateTimePicker.Enabled = false;
             this.CreatedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.CreatedDateTimePicker.Location = new System.Drawing.Point(95, 80);
+            this.CreatedDateTimePicker.Location = new System.Drawing.Point(93, 79);
             this.CreatedDateTimePicker.Margin = new System.Windows.Forms.Padding(5);
             this.CreatedDateTimePicker.Name = "CreatedDateTimePicker";
             this.CreatedDateTimePicker.Size = new System.Drawing.Size(135, 26);
@@ -110,7 +110,7 @@
             // ModifiedLabel
             // 
             this.ModifiedLabel.AutoSize = true;
-            this.ModifiedLabel.Location = new System.Drawing.Point(250, 85);
+            this.ModifiedLabel.Location = new System.Drawing.Point(252, 85);
             this.ModifiedLabel.Name = "ModifiedLabel";
             this.ModifiedLabel.Size = new System.Drawing.Size(73, 20);
             this.ModifiedLabel.TabIndex = 6;
@@ -118,14 +118,14 @@
             // 
             // NoteTextBox
             // 
-            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteTextBox.Location = new System.Drawing.Point(12, 116);
-            this.NoteTextBox.Margin = new System.Windows.Forms.Padding(5);
+            this.NoteTextBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 9);
             this.NoteTextBox.Multiline = true;
             this.NoteTextBox.Name = "NoteTextBox";
-            this.NoteTextBox.Size = new System.Drawing.Size(754, 325);
+            this.NoteTextBox.Size = new System.Drawing.Size(754, 319);
             this.NoteTextBox.TabIndex = 8;
             // 
             // OKButton
