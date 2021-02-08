@@ -9,46 +9,43 @@ namespace NoteApp
     /// <summary>
     /// Класс заметок.
     /// </summary>
-    internal class Note : ICloneable
+    public class Note : ICloneable
     {
         /// <summary>
         /// Текст названия.
         /// </summary>
-        /// <remarks>
-        /// Доступно для изменений.
-        /// </remarks>
-        private string _title { get; set; }
+        private string _title;
+
         /// <summary>
         /// Категория заметки.
         /// </summary>
-       
-        private NoteСategory _category { get; set; }
+        private NoteCategory _category;
+
         /// <summary>
         /// Текст заметки.
         /// </summary>
-       
-        private string _text { get; set; }
+        private string _text;
+
         /// <summary>
         /// Время создания.
         /// </summary>
-       
-        private readonly DateTime _creationTime;
+        private DateTime _creationTime;
+
         /// <summary>
         /// Время последнего изменения.
         /// </summary>
-        
-        private DateTime _lastChangeTime { get; }
+        private DateTime _lastChangeTime;
 
         public Note()
         {
             _title = "Новая запись";
-            _category = NoteСategory.Other;
+            _category = NoteCategory.Other;
             _text = "";
             _creationTime = DateTime.Now;
             _lastChangeTime = DateTime.Now;
         }
 
-        public Note(string title, NoteСategory category, string text)
+        public Note(string title, NoteCategory category, string text)
         {
             _title = title;
             _category = category;
@@ -58,7 +55,7 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// Метод, выполняющий копирование объекта.
+        /// Выполняет копирование объекта класса Note.
         /// </summary>
         public object Clone()
         {
@@ -66,14 +63,16 @@ namespace NoteApp
             {
                 _title = this._title,
                 _category = this._category,
-                _text = this._text
+                _text = this._text,
+                _creationTime = this._creationTime,
+                _lastChangeTime = this._lastChangeTime
             };
         }
 
         /// <summary>
-        /// Возвращает и задает текст названия.
+        /// Возвращает или задает текст названия заметки.
         /// </summary>
-        internal string Title
+        public string Title
         {
             get
             {
@@ -82,22 +81,71 @@ namespace NoteApp
             set
             {
                 if (value.Length > 50)
-                    _title = value.Substring(0, 50);
+                    throw new ArgumentException("Заголовок должен иметь длину не более 50 символов.");
                 else
                     _title = value;
             }
         }
 
         /// <summary>
+        /// Возвращает или задает категорию заметки.
+        /// </summary>
+        public NoteCategory Category
+        {
+            get
+            {
+                return _category;
+            }
+            set
+            {
+                _category = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задает основной текст заметки.
+        /// </summary>
+        public string Text
+        {
+            set
+            {
+                _text = value;
+            }
+            get
+            {
+                return _text;
+            }
+        }
+
+        /// <summary>
         /// Возвращает время создания заметки.
         /// </summary>
-        internal DateTime CreationTime
+        public DateTime CreationTime
         {
+            set
+            {
+                _creationTime = value;
+            }
             get
             {
                 return _creationTime;
             }
         }
 
+        /// <summary>
+        /// Возвращает время последнего изменения заметки.
+        /// </summary>
+        public DateTime LastChangeTime
+        {
+            set
+            {
+                _lastChangeTime = value;
+            }
+
+            get
+            {
+                return _lastChangeTime;
+            }
+        }
     }
 }

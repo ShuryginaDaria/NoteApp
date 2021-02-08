@@ -14,14 +14,14 @@ namespace NoteApp
     /// В качестве типа перечислителей используется тип byte, 
     /// потому что это позволит сэкономить память при большом количестве заметок 	(порядка 200).
    
-    enum NoteСategory : byte
+    public enum NoteCategory : byte
     {
-        Work,
-        Home,
-        HealthAndSport,
-        People,
         Document,
         Finance,
-        Other
+        HealthAndSport,
+        Home,
+        Other,
+        People,
+        Work,
     };
 }

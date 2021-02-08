@@ -8,10 +8,25 @@ using NoteApp;
 namespace NoteApp
 {
     /// <summary>
-    /// Класс, содержащий словарь всех заметок.
+    /// Класс, содержащий список всех заметок.
     /// </summary>
     public class Project
     {
-        private Dictionary<int, Note> _projectDictionary { get; set; } = new Dictionary<int, Note>();
+        private List <Note> _notesList { get; set; } = new List<Note>();
+
+        /// <summary>
+        /// Возвращает или задает список всех заметок.
+        /// </summary>
+        public List<Note> NotesList
+        {
+            get
+            {
+                return _notesList;
+            }
+            set
+            {
+                _notesList = value;
+            }
+        }
     }
 }

@@ -8,6 +8,9 @@ using System.IO;
 
 namespace NoteApp
 {
+    /// <summary>
+    /// Класс, реализующий методы сохранения и загрузки объекта класса Project.
+    /// </summary>
     public class ProjectManager
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace NoteApp
 
         
         /// <summary>
-        /// Проверка существования файла. Если файл не будет найден, то создастся новый.
+        /// Проверяет существование файла. Если файл не будет найден, то создается новый.
         /// </summary>
         public static void CheckFile()
         {
@@ -26,10 +29,9 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// Метод, выполняющий запись в файл
+        /// Сохраняет объекта класса Project в файл.
         /// </summary>
-   
-        public static void Serialization(Project notes)
+        public static void SaveToFile (Project notes)
         {
             JsonSerializer serializer = new JsonSerializer();
 
@@ -42,10 +44,9 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// Метод, выполняющий ЧТЕНИЕ из файла
+        /// Загружает объекта класса Project из файла.
         /// </summary>
-      
-        public static Project Deserialization()
+        public static Project LoadFromFile()
         {
             JsonSerializer serializer = new JsonSerializer();
             Project project = null;
@@ -60,5 +61,4 @@ namespace NoteApp
             return project;
         }
     }
-
 }

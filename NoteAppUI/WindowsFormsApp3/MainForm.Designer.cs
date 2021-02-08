@@ -103,6 +103,7 @@
             this.RemoveButton.Size = new System.Drawing.Size(40, 40);
             this.RemoveButton.TabIndex = 3;
             this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
             // EditButton
             // 
@@ -114,6 +115,7 @@
             this.EditButton.Size = new System.Drawing.Size(40, 40);
             this.EditButton.TabIndex = 2;
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // AddButton
             // 
@@ -159,6 +161,7 @@
             this.NoteListBox.Name = "NoteListBox";
             this.NoteListBox.Size = new System.Drawing.Size(279, 344);
             this.NoteListBox.TabIndex = 0;
+            this.NoteListBox.SelectedIndexChanged += new System.EventHandler(this.NoteListBox_SelectedIndexChanged);
             // 
             // ModifiedDateTimePicker
             // 
@@ -282,22 +285,25 @@
             // 
             this.AddNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("AddNoteToolStripMenu.Image")));
             this.AddNoteToolStripMenu.Name = "AddNoteToolStripMenu";
-            this.AddNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
+            this.AddNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
             this.AddNoteToolStripMenu.Text = "Add Note";
+            this.AddNoteToolStripMenu.Click += new System.EventHandler(this.AddNoteToolStripMenu_Click);
             // 
             // EditNoteToolStripMenu
             // 
             this.EditNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("EditNoteToolStripMenu.Image")));
             this.EditNoteToolStripMenu.Name = "EditNoteToolStripMenu";
-            this.EditNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
+            this.EditNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
             this.EditNoteToolStripMenu.Text = "Edit Note";
+            this.EditNoteToolStripMenu.Click += new System.EventHandler(this.EditNoteToolStripMenu_Click);
             // 
             // RemoveNoteToolStripMenu
             // 
             this.RemoveNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("RemoveNoteToolStripMenu.Image")));
             this.RemoveNoteToolStripMenu.Name = "RemoveNoteToolStripMenu";
-            this.RemoveNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
+            this.RemoveNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
             this.RemoveNoteToolStripMenu.Text = "Remove Note";
+            this.RemoveNoteToolStripMenu.Click += new System.EventHandler(this.RemoveNoteToolStripMenu_Click);
             // 
             // HelpToolStripMenu
             // 
@@ -329,6 +335,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "MainForm";
             this.Text = "NoteApp";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.MainSplitContainer.Panel1.ResumeLayout(false);
             this.MainSplitContainer.Panel1.PerformLayout();
             this.MainSplitContainer.Panel2.ResumeLayout(false);

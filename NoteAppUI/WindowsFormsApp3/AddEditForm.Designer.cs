@@ -30,7 +30,7 @@
         {
             this.TitleLabel = new System.Windows.Forms.Label();
             this.CategoryLabel = new System.Windows.Forms.Label();
-            this.TitleTtextBox = new System.Windows.Forms.TextBox();
+            this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.CreatedLabel = new System.Windows.Forms.Label();
             this.CreatedDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -59,16 +59,19 @@
             this.CategoryLabel.TabIndex = 1;
             this.CategoryLabel.Text = "Category:";
             // 
-            // TitleTtextBox
+            // TitleTextBox
             // 
-            this.TitleTtextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TitleTextBox.AccessibleDescription = "";
+            this.TitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleTtextBox.Location = new System.Drawing.Point(93, 6);
-            this.TitleTtextBox.Margin = new System.Windows.Forms.Padding(5);
-            this.TitleTtextBox.MaximumSize = new System.Drawing.Size(900, 26);
-            this.TitleTtextBox.Name = "TitleTtextBox";
-            this.TitleTtextBox.Size = new System.Drawing.Size(673, 26);
-            this.TitleTtextBox.TabIndex = 2;
+            this.TitleTextBox.Location = new System.Drawing.Point(93, 6);
+            this.TitleTextBox.Margin = new System.Windows.Forms.Padding(5);
+            this.TitleTextBox.MaximumSize = new System.Drawing.Size(900, 26);
+            this.TitleTextBox.MaxLength = 500;
+            this.TitleTextBox.Name = "TitleTextBox";
+            this.TitleTextBox.Size = new System.Drawing.Size(673, 26);
+            this.TitleTextBox.TabIndex = 2;
+            this.TitleTextBox.TextChanged += new System.EventHandler(this.TitleTextBox_TextChanged);
             // 
             // CategoryComboBox
             // 
@@ -78,6 +81,7 @@
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(193, 28);
             this.CategoryComboBox.TabIndex = 3;
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // CreatedLabel
             // 
@@ -127,6 +131,7 @@
             this.NoteTextBox.Name = "NoteTextBox";
             this.NoteTextBox.Size = new System.Drawing.Size(754, 319);
             this.NoteTextBox.TabIndex = 8;
+            this.NoteTextBox.TextChanged += new System.EventHandler(this.NoteTextBox_TextChanged);
             // 
             // OKButton
             // 
@@ -137,6 +142,7 @@
             this.OKButton.TabIndex = 9;
             this.OKButton.Text = "OK";
             this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // CancelButton
             // 
@@ -147,6 +153,7 @@
             this.CancelButton.TabIndex = 10;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // AddEditForm
             // 
@@ -161,7 +168,7 @@
             this.Controls.Add(this.CreatedDateTimePicker);
             this.Controls.Add(this.CreatedLabel);
             this.Controls.Add(this.CategoryComboBox);
-            this.Controls.Add(this.TitleTtextBox);
+            this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.CategoryLabel);
             this.Controls.Add(this.TitleLabel);
             this.MinimumSize = new System.Drawing.Size(600, 400);
@@ -177,7 +184,7 @@
 
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label CategoryLabel;
-        private System.Windows.Forms.TextBox TitleTtextBox;
+        private System.Windows.Forms.TextBox TitleTextBox;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.Label CreatedLabel;
         private System.Windows.Forms.DateTimePicker CreatedDateTimePicker;

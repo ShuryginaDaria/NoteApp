@@ -55,10 +55,10 @@
             this.EmailLinkLabel.Location = new System.Drawing.Point(174, 182);
             this.EmailLinkLabel.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.EmailLinkLabel.Name = "EmailLinkLabel";
-            this.EmailLinkLabel.Size = new System.Drawing.Size(157, 20);
+            this.EmailLinkLabel.Size = new System.Drawing.Size(153, 20);
             this.EmailLinkLabel.TabIndex = 1;
             this.EmailLinkLabel.TabStop = true;
-            this.EmailLinkLabel.Text = "Tillmedie@gmail.com";
+            this.EmailLinkLabel.Text = "tillmedie@gmail.com";
             // 
             // GitHubLinkLabel
             // 
