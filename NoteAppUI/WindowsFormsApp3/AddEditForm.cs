@@ -73,7 +73,7 @@ namespace WindowsFormsApp3
         }
 
         /// <summary>
-		/// Обрабатывает событие изменения текста заголовка.
+		/// Изменение текста заголовка.
 		/// </summary>
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -91,12 +91,12 @@ namespace WindowsFormsApp3
             _noteData.Category = (NoteCategory)CategoryComboBox.SelectedItem;
 
             // Изменение цвета элемента на стандартный на случай,
-            // если ранее он был изменен из-за ошибки создания или редактирования
+            // если ранее он был изменен из-за ошибки создания или редактирования.
             CategoryComboBox.BackColor = Color.Empty;
         }
 
         /// <summary>
-		/// Обрабатывает событие изменения основного текста заметки.
+		/// Изменение основного текста заметки.
 		/// </summary>
         private void NoteTextBox_TextChanged(object sender, EventArgs e)
         {
