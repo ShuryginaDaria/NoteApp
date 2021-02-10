@@ -76,10 +76,12 @@
             // CategoryComboBox
             // 
             this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CategoryComboBox.Location = new System.Drawing.Point(93, 42);
             this.CategoryComboBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 5);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(193, 28);
+            this.CategoryComboBox.Sorted = true;
             this.CategoryComboBox.TabIndex = 3;
             this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 

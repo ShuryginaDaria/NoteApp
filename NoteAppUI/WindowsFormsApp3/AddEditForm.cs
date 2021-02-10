@@ -77,7 +77,9 @@ namespace WindowsFormsApp3
 		/// </summary>
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (TitleTextBox.Text.Length <= 50)
+            if (TitleTextBox.Text.Length > 50)
+                TitleTextBox.BackColor = Color.Red;
+            else
                 TitleTextBox.BackColor = Color.Empty;
         }
 
@@ -112,8 +114,6 @@ namespace WindowsFormsApp3
             }
             catch (ArgumentException exception)
             {
-                TitleTextBox.BackColor = Color.Red;
-
                 MessageBox.Show(exception.Message,
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 

@@ -148,7 +148,8 @@
             this.CategoryComboBox.MaximumSize = new System.Drawing.Size(220, 0);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(156, 28);
-            this.CategoryComboBox.TabIndex = 0;
+            this.CategoryComboBox.TabIndex = 1;
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // NoteListBox
             // 
@@ -162,6 +163,7 @@
             this.NoteListBox.Size = new System.Drawing.Size(279, 344);
             this.NoteListBox.TabIndex = 0;
             this.NoteListBox.SelectedIndexChanged += new System.EventHandler(this.NoteListBox_SelectedIndexChanged);
+            this.NoteListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NoteListBox_KeyDown);
             // 
             // ModifiedDateTimePicker
             // 
@@ -285,7 +287,7 @@
             // 
             this.AddNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("AddNoteToolStripMenu.Image")));
             this.AddNoteToolStripMenu.Name = "AddNoteToolStripMenu";
-            this.AddNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
+            this.AddNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
             this.AddNoteToolStripMenu.Text = "Add Note";
             this.AddNoteToolStripMenu.Click += new System.EventHandler(this.AddNoteToolStripMenu_Click);
             // 
@@ -293,7 +295,7 @@
             // 
             this.EditNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("EditNoteToolStripMenu.Image")));
             this.EditNoteToolStripMenu.Name = "EditNoteToolStripMenu";
-            this.EditNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
+            this.EditNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
             this.EditNoteToolStripMenu.Text = "Edit Note";
             this.EditNoteToolStripMenu.Click += new System.EventHandler(this.EditNoteToolStripMenu_Click);
             // 
@@ -301,7 +303,7 @@
             // 
             this.RemoveNoteToolStripMenu.Image = ((System.Drawing.Image)(resources.GetObject("RemoveNoteToolStripMenu.Image")));
             this.RemoveNoteToolStripMenu.Name = "RemoveNoteToolStripMenu";
-            this.RemoveNoteToolStripMenu.Size = new System.Drawing.Size(252, 30);
+            this.RemoveNoteToolStripMenu.Size = new System.Drawing.Size(204, 30);
             this.RemoveNoteToolStripMenu.Text = "Remove Note";
             this.RemoveNoteToolStripMenu.Click += new System.EventHandler(this.RemoveNoteToolStripMenu_Click);
             // 

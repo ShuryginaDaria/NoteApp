@@ -28,12 +28,8 @@ namespace WindowsFormsApp3
             // Загрузка данных из файла.
             _notes = ProjectManager.LoadFromFile();
 
-            if (_notes != null)
-                UpdateListBox();
-            else
-                _notes = new Project();
-
             // Заполнение выпадающего списка категорий элементами.
+            CategoryComboBox.Items.Add("All");
             CategoryComboBox.Items.Add(NoteCategory.Document);
             CategoryComboBox.Items.Add(NoteCategory.Finance);
             CategoryComboBox.Items.Add(NoteCategory.HealthAndSport);
@@ -42,32 +38,71 @@ namespace WindowsFormsApp3
             CategoryComboBox.Items.Add(NoteCategory.People);
             CategoryComboBox.Items.Add(NoteCategory.Work);
 
-            // Изначально запись не выбрана и никакие данные не отображаются
-            // на панели полной информации
-            ChangeVisiblePanel(false);
+            if (_notes != null)
+                UpdateListBox();
+            else
+                _notes = new Project();
+
+            // Изначально отображаются заметки всех категорий
+            CategoryComboBox.SelectedIndex = 0;
+ 
+            ChangeVisiblePanel(true);
         }
 
         /// <summary>
-		/// Обновляет список заметок на главной форме.
-		/// </summary>
-		private void UpdateListBox()
+        /// Возвращает список заметок, категория которых выбрана в CategoryComboBox,
+        /// и отсортированных по времени последнего изменения.
+        /// </summary>
+        private List<Note> notesOfSelectedCategory()
+        {
+            List<Note> notesList = new List<Note>();
+
+            if (CategoryComboBox.SelectedIndex == 0 || CategoryComboBox.SelectedItem == null)
+                notesList = _notes.SortToLastChangeDate();
+            else
+                notesList = _notes.SortToLastChangeDate((NoteCategory)CategoryComboBox.SelectedItem);
+
+            return notesList;
+        }
+
+        /// <summary>
+        /// Обновляет список заметок на главной форме.
+        /// </summary>
+        private void UpdateListBox()
         {
             NoteListBox.Items.Clear();
 
             if (_notes != null)
             {
-                for (int i = 0; i < _notes.NotesList.Count; i++)
+                List<Note> notesList = notesOfSelectedCategory();
+                Note currentNote = new Note();
+
+                for (int i = 0; i < notesList.Count; i++)
                 {
                     // Если заметка имеет заголовок, он отображается в списке.
-                    if (_notes.NotesList[i].Title != "")
-                        NoteListBox.Items.Add(_notes.NotesList[i].Title);
+                    if (notesList[i].Title != "")
+                        NoteListBox.Items.Add(notesList[i].Title);
                     // Если заметка не имеет названия, она отображается
                     // под заголовком "Без названия". 
                     else
                     {
                         NoteListBox.Items.Add("Без названия");
-                    }  
+                    }
+
+                    if (notesList[i].Title == _notes.CurrentNote.Title &&
+                        notesList[i].Text == _notes.CurrentNote.Text &&
+                        notesList[i].Category == _notes.CurrentNote.Category &&
+                        notesList[i].CreationTime== _notes.CurrentNote.CreationTime &&
+                        notesList[i].LastChangeTime == _notes.CurrentNote.LastChangeTime)
+                    {
+                        currentNote = notesList[i];
+                    }
                 }
+
+                int currentNoteIndex = notesList.IndexOf(currentNote);
+
+                if (currentNote != null && currentNoteIndex != -1)
+                    NoteListBox.SetSelected(notesList.IndexOf(currentNote), true);
             }
         }
 
@@ -77,10 +112,11 @@ namespace WindowsFormsApp3
         private void NoteListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ChangeVisiblePanel(true);
+            List<Note> notesList = notesOfSelectedCategory();
 
             try
             {
-                var selectedNote = _notes.NotesList[NoteListBox.SelectedIndex];
+                var selectedNote = notesList[NoteListBox.SelectedIndex];
 
                 if (selectedNote.Title == "")
                     TitleLabel.Text = "Без названия";
@@ -92,6 +128,9 @@ namespace WindowsFormsApp3
                 CreatedDateTimePicker.Value = selectedNote.CreationTime;
                 ModifiedDateTimePicker.Value = selectedNote.LastChangeTime;
                 NoteTextBox.Text = selectedNote.Text;
+
+                _notes.CurrentNote = selectedNote;
+                ProjectManager.SaveToFile(_notes);
             }
             catch
             {
@@ -181,9 +220,10 @@ namespace WindowsFormsApp3
                     // Удаление заметки со старыми данными из списка.
                     _notes.NotesList.RemoveAt(selectedIndex + 1);
 
+                    _notes.CurrentNote = editedNote;
                     //NoteListBox.Items.Insert(selectedIndex, editedNote.Title);
                     UpdateListBox();
-                    NoteListBox.SetSelected(selectedIndex, true);
+                    //NoteListBox.SetSelected(selectedIndex, true);
                 }
                 else
                     return;
@@ -219,9 +259,9 @@ namespace WindowsFormsApp3
             {
                 _notes.NotesList.RemoveAt(selectedIndex);
                 UpdateListBox();
+                ChangeVisiblePanel(false);
             }
 
-            ChangeVisiblePanel(false);
             ProjectManager.SaveToFile(_notes);
         }
 
@@ -261,9 +301,27 @@ namespace WindowsFormsApp3
             Remove();
         }
 
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateListBox();
+
+            if (CategoryComboBox.SelectedIndex == 0)
+                ChangeVisiblePanel(true);
+            else if ((NoteCategory)CategoryComboBox.SelectedItem != _notes.CurrentNote.Category)
+                ChangeVisiblePanel(false);
+            else
+                ChangeVisiblePanel(true);
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void NoteListBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                Remove();
         }
     }
 }
