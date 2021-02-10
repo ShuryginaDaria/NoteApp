@@ -241,7 +241,20 @@ namespace WindowsFormsApp3
 		/// </summary>
 		private void Remove()
         {
-            var selectedIndex = NoteListBox.SelectedIndex;
+            Note selectedNote = notesOfSelectedCategory()[NoteListBox.SelectedIndex];
+            int selectedIndex = -1;
+
+            for (int i = 0; i < _notes.NotesList.Count; i++)
+            {
+                if (selectedNote.Title == _notes.NotesList[i].Title &&
+                        selectedNote.Text == _notes.NotesList[i].Text &&
+                        selectedNote.Category == _notes.NotesList[i].Category &&
+                        selectedNote.CreationTime == _notes.NotesList[i].CreationTime &&
+                        selectedNote.LastChangeTime == _notes.NotesList[i].LastChangeTime)
+                {
+                    selectedIndex = i;
+                }
+            }         
 
             if (selectedIndex == -1)
             {
