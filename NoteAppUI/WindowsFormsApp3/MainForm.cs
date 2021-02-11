@@ -25,9 +25,6 @@ namespace WindowsFormsApp3
         {
             InitializeComponent();
 
-            // Загрузка данных из файла.
-            _notes = ProjectManager.LoadFromFile();
-
             // Заполнение выпадающего списка категорий элементами.
             CategoryComboBox.Items.Add("All");
             CategoryComboBox.Items.Add(NoteCategory.Document);
@@ -38,15 +35,22 @@ namespace WindowsFormsApp3
             CategoryComboBox.Items.Add(NoteCategory.People);
             CategoryComboBox.Items.Add(NoteCategory.Work);
 
-            if (_notes != null)
-                UpdateListBox();
-            else
-                _notes = new Project();
+            // Загрузка данных из файла.
+            _notes = ProjectManager.LoadFromFile();
 
-            // Изначально отображаются заметки всех категорий
+            if (_notes != null)
+            {
+                UpdateListBox();
+                ChangeVisiblePanel(true);
+            }
+            else
+            {
+                _notes = new Project();
+                ChangeVisiblePanel(false);
+            }
+
+            // При запуске программы отображаются заметки всех категорий
             CategoryComboBox.SelectedIndex = 0;
- 
-            ChangeVisiblePanel(true);
         }
 
         /// <summary>
@@ -55,14 +59,14 @@ namespace WindowsFormsApp3
         /// </summary>
         private List<Note> notesOfSelectedCategory()
         {
-            List<Note> notesList = new List<Note>();
+            List<Note> categoryNotesList = new List<Note>();
 
             if (CategoryComboBox.SelectedIndex == 0 || CategoryComboBox.SelectedItem == null)
-                notesList = _notes.SortToLastChangeDate();
+                categoryNotesList = _notes.SortToLastChangeDate();
             else
-                notesList = _notes.SortToLastChangeDate((NoteCategory)CategoryComboBox.SelectedItem);
+                categoryNotesList = _notes.SortToLastChangeDate((NoteCategory)CategoryComboBox.SelectedItem);
 
-            return notesList;
+            return categoryNotesList;
         }
 
         /// <summary>
@@ -85,10 +89,9 @@ namespace WindowsFormsApp3
                     // Если заметка не имеет названия, она отображается
                     // под заголовком "Без названия". 
                     else
-                    {
                         NoteListBox.Items.Add("Без названия");
-                    }
 
+                    // Получение последней выбранной заметки.
                     if (notesList[i].Title == _notes.CurrentNote.Title &&
                         notesList[i].Text == _notes.CurrentNote.Text &&
                         notesList[i].Category == _notes.CurrentNote.Category &&
@@ -101,13 +104,58 @@ namespace WindowsFormsApp3
 
                 int currentNoteIndex = notesList.IndexOf(currentNote);
 
+                // Выделение последней выбранной заметки.
                 if (currentNote != null && currentNoteIndex != -1)
                     NoteListBox.SetSelected(notesList.IndexOf(currentNote), true);
             }
         }
 
         /// <summary>
-		/// Обработка события выбора записи из списка заметок.
+        /// Изменяет видимость информации на правой панели главной формы.
+        /// </summary>
+        /// <remarks>Необходимо скрывать текст и элементы управления, относящиеся к определенной заметке, 
+        /// в случае, когда из списка записей ничего не выбрано. При выборе записи из списка 
+        /// соответствующая информация снова появляется на панели.</remarks>
+        /// <param name="isVisible">true - visible, false - not visible</param>
+        private void ChangeVisiblePanel(bool isVisible)
+        {
+            TitleLabel.Visible = isVisible;
+            CategoryLabel.Visible = isVisible;
+            CreatedDateTimePicker.Visible = isVisible;
+            CreatedDateTimePicker.Visible = isVisible;
+            ModifiedDateTimePicker.Visible = isVisible;
+            ModifiedDateTimePicker.Visible = isVisible;
+
+            if (!isVisible)
+                NoteTextBox.Text = "";
+        }
+
+        /// <summary>
+        /// Возвращает индекс заметки в общем списке, которая соответствует
+        /// индексу выбранной заметки.
+        /// </summary>
+        private int GetAppropriateIndex(int selectedIndex)
+        {
+            Note selectedNote = notesOfSelectedCategory()[selectedIndex];
+            int appropriateIndex = -1;
+
+            for (int i = 0; i < _notes.NotesList.Count; i++)
+            {
+                if (selectedNote.Title == _notes.NotesList[i].Title &&
+                        selectedNote.Text == _notes.NotesList[i].Text &&
+                        selectedNote.Category == _notes.NotesList[i].Category &&
+                        selectedNote.CreationTime == _notes.NotesList[i].CreationTime &&
+                        selectedNote.LastChangeTime == _notes.NotesList[i].LastChangeTime)
+                {
+                    appropriateIndex = i;
+                }
+            }
+
+            return appropriateIndex;
+        }
+
+        /// <summary>
+		/// Выбор записи из списка заметок.
 		/// </summary>
         private void NoteListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -124,7 +172,6 @@ namespace WindowsFormsApp3
                     TitleLabel.Text = selectedNote.Title;
 
                 CategoryLabel.Text = selectedNote.Category.ToString();
-
                 CreatedDateTimePicker.Value = selectedNote.CreationTime;
                 ModifiedDateTimePicker.Value = selectedNote.LastChangeTime;
                 NoteTextBox.Text = selectedNote.Text;
@@ -139,23 +186,18 @@ namespace WindowsFormsApp3
         }
 
         /// <summary>
-		/// Изменяет видимость информации на правой панели главной формы.
+		/// Выбор категории заметок.
 		/// </summary>
-		/// <remarks>Необходимо скрывать текст и элементы управления, относящиеся к определенной заметке, 
-		/// в случае, когда из списка записей ничего не выбрано. При выборе записи из списка 
-		/// соответствующая информация снова появляется на панели.</remarks>
-		/// <param name="isVisible">true - visible, false - not visible</param>
-		private void ChangeVisiblePanel(bool isVisible)
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TitleLabel.Visible = isVisible;
-            CategoryLabel.Visible = isVisible;
-            CreatedDateTimePicker.Visible = isVisible;
-            CreatedDateTimePicker.Visible = isVisible;
-            ModifiedDateTimePicker.Visible = isVisible;
-            ModifiedDateTimePicker.Visible = isVisible;
+            UpdateListBox();
 
-            if (!isVisible)
-                NoteTextBox.Text = "";
+            if (CategoryComboBox.SelectedIndex == 0)
+                ChangeVisiblePanel(true);
+            else if ((NoteCategory)CategoryComboBox.SelectedItem != _notes.CurrentNote.Category)
+                ChangeVisiblePanel(false);
+            else
+                ChangeVisiblePanel(true);
         }
 
         /// <summary>
@@ -171,7 +213,6 @@ namespace WindowsFormsApp3
                 var addedNote = addForm.NoteData;
 
                 _notes.NotesList.Add(addedNote);
-                //NoteListBox.Items.Add(addedNote);
                 UpdateListBox();
             }
             else
@@ -185,7 +226,7 @@ namespace WindowsFormsApp3
 		/// </summary>
 		private void EditNote()
         {
-            var selectedIndex = NoteListBox.SelectedIndex;
+            var selectedIndex = GetAppropriateIndex(NoteListBox.SelectedIndex);
 
             if (selectedIndex == -1)
             {
@@ -221,9 +262,7 @@ namespace WindowsFormsApp3
                     _notes.NotesList.RemoveAt(selectedIndex + 1);
 
                     _notes.CurrentNote = editedNote;
-                    //NoteListBox.Items.Insert(selectedIndex, editedNote.Title);
                     UpdateListBox();
-                    //NoteListBox.SetSelected(selectedIndex, true);
                 }
                 else
                     return;
@@ -241,20 +280,7 @@ namespace WindowsFormsApp3
 		/// </summary>
 		private void Remove()
         {
-            Note selectedNote = notesOfSelectedCategory()[NoteListBox.SelectedIndex];
-            int selectedIndex = -1;
-
-            for (int i = 0; i < _notes.NotesList.Count; i++)
-            {
-                if (selectedNote.Title == _notes.NotesList[i].Title &&
-                        selectedNote.Text == _notes.NotesList[i].Text &&
-                        selectedNote.Category == _notes.NotesList[i].Category &&
-                        selectedNote.CreationTime == _notes.NotesList[i].CreationTime &&
-                        selectedNote.LastChangeTime == _notes.NotesList[i].LastChangeTime)
-                {
-                    selectedIndex = i;
-                }
-            }         
+            int selectedIndex = GetAppropriateIndex(NoteListBox.SelectedIndex);
 
             if (selectedIndex == -1)
             {
@@ -314,23 +340,14 @@ namespace WindowsFormsApp3
             Remove();
         }
 
-        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateListBox();
-
-            if (CategoryComboBox.SelectedIndex == 0)
-                ChangeVisiblePanel(true);
-            else if ((NoteCategory)CategoryComboBox.SelectedItem != _notes.CurrentNote.Category)
-                ChangeVisiblePanel(false);
-            else
-                ChangeVisiblePanel(true);
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+		/// Удаление выбранной заметки клавишой Delete.
+		/// </summary>
         private void NoteListBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
