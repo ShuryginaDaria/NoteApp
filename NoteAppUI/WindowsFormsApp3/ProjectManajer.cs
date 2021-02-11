@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -16,7 +12,7 @@ namespace NoteApp
         /// <summary>
         /// Путь к файлу.
         /// </summary>
-        private static string _stringMyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp.notes";
+        public static string StringMyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp.notes";
 
         
         /// <summary>
@@ -24,8 +20,8 @@ namespace NoteApp
         /// </summary>
         public static void CheckFile()
         {
-            if (!File.Exists(_stringMyDocumentsPath))
-                File.Create(_stringMyDocumentsPath).Close();
+            if (!File.Exists(StringMyDocumentsPath))
+                File.Create(StringMyDocumentsPath).Close();
         }
 
         /// <summary>
@@ -36,7 +32,7 @@ namespace NoteApp
             JsonSerializer serializer = new JsonSerializer();
 
             CheckFile();
-            using (StreamWriter sw = new StreamWriter(_stringMyDocumentsPath))
+            using (StreamWriter sw = new StreamWriter(StringMyDocumentsPath))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, notes);
@@ -52,7 +48,7 @@ namespace NoteApp
             Project project = null;
 
             CheckFile();
-            using (StreamReader sr = new StreamReader(_stringMyDocumentsPath))
+            using (StreamReader sr = new StreamReader(StringMyDocumentsPath))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 project = (Project)serializer.Deserialize<Project>(reader);

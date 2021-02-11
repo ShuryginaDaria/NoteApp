@@ -10,7 +10,7 @@ namespace NoteApp
     /// <summary>
     /// Класс, содержащий список всех заметок.
     /// </summary>
-    public class Project
+    public class Project : IEquatable<Project>
     {
         private List <Note> _notesList = new List<Note>();
 
@@ -45,55 +45,30 @@ namespace NoteApp
 
         public List<Note> SortToLastChangeDate()
         {
-            List<Note> sortedList = _notesList;
-            int listLength = sortedList.Count;
-            Note tmp = new Note();
-
-
-            for(int i = 0; i < listLength; i++)
-            {
-                for (int j = (listLength-1); j >= (i+1); j--)
-                {
-                    if (sortedList[j].LastChangeTime > sortedList[j-1].LastChangeTime)
-                    {
-                        tmp = sortedList[j];
-                        sortedList[j] = sortedList[j - 1];
-                        sortedList[j - 1] = tmp;
-                    }
-                }
-            }
+            var sortedList = NotesList
+                .OrderByDescending(i => i.LastChangeTime)
+                .ToList();
 
             return sortedList;
         }
 
         public List<Note> SortToLastChangeDate(NoteCategory category)
         {
-            List<Note> sortedList = new List<Note>();
-
-            for (int k = 0; k < _notesList.Count; k++)
-            {
-                if (_notesList[k].Category == category)
-                    sortedList.Add(_notesList[k]);
-            }
-            
-            int listLength = sortedList.Count;
-            Note tmp = new Note();
-
-
-            for (int i = 0; i < listLength; i++)
-            {
-                for (int j = (listLength - 1); j >= (i + 1); j--)
-                {
-                    if (sortedList[j].LastChangeTime > sortedList[j - 1].LastChangeTime)
-                    {
-                        tmp = sortedList[j];
-                        sortedList[j] = sortedList[j - 1];
-                        sortedList[j - 1] = tmp;
-                    }
-                }
-            }
+            var sortedList = NotesList
+                .Where(j => j.Category == category)
+                .OrderByDescending(i => i.LastChangeTime)
+                .ToList();
 
             return sortedList;
+        }
+
+        public bool Equals(Project other)
+        {
+            if (other == null)
+                return false;
+            var notesEqual = NotesList.SequenceEqual(other.NotesList);
+            var currentNoteEqual = CurrentNote.Equals(other.CurrentNote);
+            return notesEqual && currentNoteEqual;
         }
     }
 }

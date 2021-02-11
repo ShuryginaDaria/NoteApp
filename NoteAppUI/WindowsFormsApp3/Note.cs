@@ -9,7 +9,7 @@ namespace NoteApp
     /// <summary>
     /// Класс заметок.
     /// </summary>
-    public class Note : ICloneable
+    public class Note : ICloneable, IEquatable<Note>
     {
         /// <summary>
         /// Текст названия.
@@ -146,6 +146,17 @@ namespace NoteApp
             {
                 return _lastChangeTime;
             }
+        }
+
+        public bool Equals(Note other)
+        {
+            if (other == null)
+                return false;
+            return other.Category == Category &&
+                   other.Text == Text &&
+                   other.Title == Title &&
+                   other.CreationTime == CreationTime &&
+                   other.LastChangeTime == LastChangeTime;
         }
     }
 }
